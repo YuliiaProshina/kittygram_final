@@ -15,18 +15,23 @@ services:
     volumes:
       - static:/app/static_kittygram
       - media:/app/media
+    depends_on:
+      - db
 
   frontend:
-    env_file: kittygram_final/.env
+    env_file: .env
     build: ./frontend/
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
   gateway:
     build: ./nginx/
-    env_file: kittygram_final/.env
+    env_file: .env
     ports:
       - 9000:80
     volumes:
       - static:/static
       - media:/media
+    depends_on:
+      - backend
+      - frontend

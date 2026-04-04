@@ -12,7 +12,8 @@ services:
     image: yuliaproshina/kittygram_backend
     env_file: .env
     volumes:
-      - static_volume:/backend_static
+      - static_volume:/app/static_kittygram
+      - media_volume:/media
   frontend:
     image: yuliaproshina/kittygram_frontend
     env_file: .env
@@ -24,5 +25,6 @@ services:
     env_file: .env
     volumes:
       - static_volume:/staticfiles/
+      - media_volume:/media
     ports:
       - 9000:80
